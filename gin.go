@@ -343,7 +343,9 @@ func (engine *Engine) RunFd(fd int) (err error) {
 
 // ServeHTTP conforms to the http.Handler interface.
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	c := engine.pool.Get().(*Context)
+	// NOTE 去掉pool依赖
+	//c := engine.pool.Get().(*Context)
+	c := engine.allocateContext()
 	c.writermem.reset(w)
 	c.Request = req
 	c.reset()
