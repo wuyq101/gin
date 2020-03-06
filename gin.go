@@ -362,7 +362,9 @@ func (engine *Engine) RunListener(listener net.Listener) (err error) {
 
 // ServeHTTP conforms to the http.Handler interface.
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	c := engine.pool.Get().(*Context)
+	// c := engine.pool.Get().(*Context)
+	// NOTE 去掉ctx的pool支持
+	c := engine.allocateContext()
 	c.writermem.reset(w)
 	c.Request = req
 	c.reset()
