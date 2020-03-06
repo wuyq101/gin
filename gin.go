@@ -352,7 +352,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	engine.handleHTTPRequest(c)
 
-	engine.pool.Put(c)
+	// engine.pool.Put(c)
 }
 
 // HandleContext re-enter a context that has been rewritten.
