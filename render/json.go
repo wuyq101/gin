@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin/internal/json"
 )
@@ -73,7 +74,11 @@ func WriteJSON(w http.ResponseWriter, obj interface{}) error {
 		return err
 	}
 	_, err = w.Write(jsonBytes)
-	return err
+	if err != nil {
+		// write err to stderr
+		fmt.Fprintln(os.Stderr, err.Error())
+	}
+	return nil
 }
 
 // Render (IndentedJSON) marshals the given interface object and writes it with custom ContentType.
