@@ -69,8 +69,9 @@ func (r JSON) WriteContentType(w http.ResponseWriter) {
 func WriteJSON(w http.ResponseWriter, obj interface{}) error {
 	writeContentType(w, jsonContentType)
 	encoder := json.NewEncoder(w)
-	err := encoder.Encode(&obj)
-	return err
+	// NOTE 不返回错误
+	encoder.Encode(&obj)
+	return nil
 }
 
 // Render (IndentedJSON) marshals the given interface object and writes it with custom ContentType.
