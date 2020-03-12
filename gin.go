@@ -359,14 +359,15 @@ func (engine *Engine) RunListener(listener net.Listener) (err error) {
 
 // ServeHTTP conforms to the http.Handler interface.
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	c := engine.pool.Get().(*Context)
+	//	c := engine.pool.Get().(*Context)
+	c := engine.allocateContext()
 	c.writermem.reset(w)
 	c.Request = req
 	c.reset()
 
 	engine.handleHTTPRequest(c)
 
-	engine.pool.Put(c)
+	//	engine.pool.Put(c)
 }
 
 // HandleContext re-enter a context that has been rewritten.
