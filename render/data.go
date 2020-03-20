@@ -13,10 +13,10 @@ type Data struct {
 }
 
 // Render (Data) writes data with custom ContentType.
-func (r Data) Render(w http.ResponseWriter) (err error) {
+func (r Data) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
-	_, err = w.Write(r.Data)
-	return
+	w.Write(r.Data)
+	return nil
 }
 
 // WriteContentType (Data) writes custom ContentType.
